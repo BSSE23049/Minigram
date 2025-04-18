@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigram Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- ✅ Add jQuery BEFORE your custom scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script defer src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            display: flex;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 350px;
+            background: #111;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-name {
+            width: 180px;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        /* Sidebar Menu */
+        .menu {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+
+
+        }
+
+        .icon-menu {
+            width: 40px;
+            height: 40px;
+
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            padding: 5px;
+            margin: 4px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hover Effect */
+        .menu-items:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+
+        /* transition fixed on sleected option*/
+        .selected-icon {
+            background: #333;
+
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 400px;
+            /* Adjusted to fit sidebar width */
+            height: 100vh;
+            /* overflow-y: auto; */
+            /* Prevents overflow */
+
+        }
+
+        .profile-container {
+            margin-bottom: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+        }
+
+        #profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .follow-button-container {
+            margin-left: 120px;
+        }
+
+        /* Base styles */
+        .follow-btn,
+        .following-btn {
+            font-family: 'Helvetica', sans-serif;
+            font-size: 10pt;
+            color: #fff;
+            background: linear-gradient(135deg, #c84fc5, #7b61ff);
+            /* Minigram gradient */
+            border: none;
+            border-radius: 25px;
+            padding: 8px 20px;
+            min-width: 100px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(140, 82, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect */
+        .follow-btn:hover,
+        .following-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(140, 82, 255, 0.6);
+        }
+
+        /* Following state (inverted gradient) */
+        .following-btn {
+            background: linear-gradient(135deg, #7b61ff, #c84fc5);
+        }
+
+
+
+
+        .post-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .post img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .post img:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="../src/images/logo.png" alt="logo" class="logo-icon">
+            <img src="../src/images/logo-name.png" alt="miigram" class="logo-name">
+        </div>
+
+        <div class="menu">
+            <div class="home-menu menu-items ">
+                <img src="../src/icons/home.png" alt="Home" id="home" class="icon-menu">
+                <a href="home.html" class="menu-item"> Home</a>
+            </div>
+
+            <a href="search.html">
+                <div class="serach-menu menu-items">
+                    <img src="../src/icons/scerch.png" alt="Search" id="search" class="icon-menu">
+                    <a href="search.html" class="menu-item"> Search</a>
+                </div>
+            </a>
+
+            <div class="message-menu menu-items">
+                <img src="../src/icons/message.png" alt="Messages" id="message" class="icon-menu">
+                <a href="#" class="menu-item"> Messages</a>
+            </div>
+
+            <a href="notification.html">
+                <div class="notification-menu menu-items">
+                    <img src="../src/icons/notification.png" alt="Notification" id="notification" class="icon-menu">
+                    <a href="notification.html" class="menu-item"> Notifications</a>
+                </div>
+            </a>
+
+            <a href="create.html">
+                <div class="create-menu menu-items">
+                    <img src="../src/icons/create.png" alt="Create" id="create" class="icon-menu">
+                    <a href="create.html" class="menu-item"> Create</a>
+                </div>
+            </a>
+
+            <a href="profile.html">
+                <div class="profile-menu menu-items selected-icon">
+                    <img src="../src/icons/profile_on_select.png" alt="Profile" id="profile" class="icon-menu">
+                    <a href="profile.html" class="menu-item"> Profile</a>
+                </div>
+            </a>
+
+            <div class="more-menu menu-items">
+                <img src="../src/icons/more.png" alt="More" id="more" class="icon-menu">
+                <a href="profile.html" class="menu-item"> More</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="profile-container">
+            <div class="profile-header">
+                <img id="profile-avatar" src="assets/images/user-avatar.jpg" alt="User Avatar">
+                <div>
+                    <h2 id="profile-name">User Name</h2>
+                    <p>
+                        <span id="post-count">0</span> Posts |
+                        <span id="follower-count">0</span> Followers |
+                        <span id="following-count">0</span> Following
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="follow-button-container">
+                <button class="follow-btn " data-user-id="{{userId}}">Follow</button>
+
+            </div>
+        </div>
+
+
+        <div class="post-gallery" id="post-gallery">
+            <!-- Posts will load dynamically -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Dummy profile data
+            const profileData = {
+                name: "Matthew Harel",
+                avatar: "https://picsum.photos/100",
+                posts: 6,
+                followers: "25.8K",
+                following: 75
+            };
+
+            // Dummy posts with likes and captions
+            const posts = [
+                { image: "https://picsum.photos/seed/post1/600/400", caption: "A beautiful sunset!", likes: 120 },
+                { image: "https://picsum.photos/seed/post2/600/400", caption: "Exploring nature", likes: 98 },
+                { image: "https://picsum.photos/seed/post3/600/400", caption: "Beyound City lights", likes: 230 },
+                { image: "https://picsum.photos/seed/post4/600/400", caption: "Mountain adventures", likes: 175 },
+                { image: "https://picsum.photos/seed/post5/600/400", caption: "Cozy coffee break", likes: 89 },
+                { image: "https://picsum.photos/seed/post6/600/400", caption: "Ocean vibes 🌊", likes: 150 }
+            ];
+
+            // Load profile data
+            document.getElementById("profile-name").innerText = profileData.name;
+            document.getElementById("profile-avatar").src = profileData.avatar;
+            document.getElementById("post-count").innerText = profileData.posts;
+            document.getElementById("follower-count").innerText = profileData.followers;
+            document.getElementById("following-count").innerText = profileData.following;
+
+            // Load posts dynamically
+            const postGallery = document.getElementById("post-gallery");
+            posts.forEach(post => {
+                const postDiv = document.createElement("div");
+                postDiv.classList.add("post");
+
+                // Post image
+                const img = document.createElement("img");
+                img.src = post.image;
+                img.alt = "Post Image";
+
+                // Post caption
+                const caption = document.createElement("p");
+                caption.innerText = post.caption;
+                caption.style.margin = "5px 0";
+                caption.style.fontSize = "16px";
+
+                // Likes count
+                const likes = document.createElement("p");
+                likes.innerText = `❤️ ${post.likes} Likes`;
+                likes.style.fontSize = "14px";
+                likes.style.color = "#aaa";
+
+                postDiv.appendChild(img);
+                postDiv.appendChild(caption);
+                postDiv.appendChild(likes);
+                postGallery.appendChild(postDiv);
+            });
+        });
+
+        $(document).ready(function () {
+            $(".follow-btn, .following-btn").on("click", function () {
+                const $btn = $(this);
+                const userId = $btn.data("user-id");
+
+                $.ajax({
+                    url: "http://localhost:3000/follow", // <- Use full URL when frontend runs separately
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ userId: "targetUser123" }), // Use actual target user ID
+                    success: function (res) {
+                        if (res.following) {
+                            $btn.removeClass("follow-btn")
+                                .addClass("following-btn")
+                                .text("Following");
+                        } else {
+                            $btn.removeClass("following-btn")
+                                .addClass("follow-btn")
+                                .text("Follow");
+                        }
+                    },
+                    error: function () {
+                        alert("Something went wrong!");
+                    }
+                });
+
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>

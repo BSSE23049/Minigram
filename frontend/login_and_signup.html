@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigram - Login & Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black flex justify-center items-center min-h-screen">
+
+    <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-12">
+
+        <!-- Left Side - Image Mockup -->
+        <div class="relative hidden md:block">
+            <img src="../src/images/phone-mockup.png" alt="Phone Mockup" class="w-80">
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div id="login-container" class="bg-gray-900 p-5 rounded-lg shadow-lg w-96 text-white">
+            <img src="../src/images/logo-name.png" alt="Logo" class="w-25 p-2" style="width: 250px; margin-left: 50px;">
+
+            <form id="login-form" style="gap: 10px;">
+                <input type="text" placeholder="Phone number, username, or email"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+                <input type="password" id="login-password" placeholder="Password"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+
+                <div id="error-message" class="text-red-500 text-sm hidden"></div>
+
+                <!-- Show Password Checkbox with Purple Tick -->
+                <label class="flex items-center text-gray-400 text-sm mb-3 cursor-pointer">
+                    <input type="checkbox" onclick="togglePassword('login-password')"
+                        class="mr-2 w-4 h-4 accent-purple-500 focus:ring-purple-500">
+                    Show Password
+                </label>
+
+
+                <!-- Temporary setting for open this page -->
+                <button onclick="loginUser()"
+                    class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-md">
+                    Log in
+                </button>
+
+            </form>
+
+            <div class="text-center my-4 text-gray-400">OR</div>
+            <a href="#" class="block text-center text-blue-400 hover:underline">Forgot password?</a>
+
+            <div class="border-t border-gray-700 my-4"></div>
+
+            <button onclick="showSignup()"
+                class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 rounded-md">
+                Sign up
+            </button>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-container" class="bg-gray-900 p-8 py-4 rounded-lg shadow-lg w-96 text-white hidden">
+            <img src="../src/images/logo-name.png" alt="Logo" class="w-25 p-2" style="width: 250px; margin-left: 40px">
+
+            <form id="signup-form">
+                <input type="text" placeholder="Full Name"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+                <input type="text" placeholder="Username"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+                <input type="email" placeholder="Email"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+                <input type="password" id="signup-password" placeholder="Password"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+                <input type="password" id="signup-confirm-password" placeholder="Confirm Password"
+                    class="w-full px-4 py-2 mb-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:ring-2 focus:ring-purple-500 outline-none">
+
+                <!-- Show Password Checkbox with Purple Tick -->
+                <label class="flex items-center text-gray-400 text-sm mb-3 cursor-pointer">
+                    <input type="checkbox"
+                        onclick="togglePassword('signup-password'); togglePassword('signup-confirm-password')"
+                        class="mr-2 w-4 h-4 accent-purple-500 focus:ring-purple-500">
+                    Show Password
+                </label>
+
+                <button class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-md">
+                    Sign up
+                </button>
+            </form>
+
+            <div class="border-t border-gray-700 my-4"></div>
+
+            <button onclick="showLogin()"
+                class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 rounded-md">
+                Back to Login
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function showSignup() {
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('signup-container').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('signup-container').classList.add('hidden');
+            document.getElementById('login-container').classList.remove('hidden');
+        }
+
+        function togglePassword(id) {
+            let passwordField = document.getElementById(id);
+            if (passwordField) {
+                passwordField.type = (passwordField.type === "password") ? "text" : "password";
+            }
+        }
+
+        // 🔹  Temporary fucntion for this implementation 
+        function loginUser() {
+
+            // 🔹 Temporary Redirect to Dashboard
+            window.open("http://127.0.0.1:5500/frontend/dashboard.html");
+        }
+    </script>
+
+</body>
+
+</html>

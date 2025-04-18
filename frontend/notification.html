@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigram Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="main.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- FontAwesome Icons -->
+
+    <style>
+        body {
+            display: flex;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 500px;
+            background: #111;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-name {
+            width: 180px;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        /* Sidebar Menu */
+        .menu {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .menu-item {
+            display: none;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+
+
+        }
+
+        /* Hover Effect */
+        .menu-items:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+        /* transition fixed on sleected option*/
+        .selected-icon {
+            background: #333;
+
+        }
+
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 600px;
+            /* Adjusted to fit sidebar width */
+            margin-right: 200px;
+            /* Adjusted to fit sidebar width */
+
+            height: 100vh;
+        }
+
+        /* Post Styling */
+        .post {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+
+        .time {
+            margin-left: auto;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .post-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .caption {
+            margin-top: 10px;
+        }
+
+        .icon-menu {
+            width: 40px;
+            height: 40px;
+
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            padding: 5px;
+            margin: 4px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            width: 40px;
+        }
+
+        .notifications {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-width: 400px;
+        }
+
+        .notification-header {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-top: 0px;
+        }
+
+        .notification {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .notification img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .notification .text {
+            flex: 1;
+        }
+
+        .notification .buttons button {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .confirm {
+            background-color: #0095f6;
+            color: white;
+            height: 30px;
+            width: 65px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .confirm:hover {
+            background-color: #0073cc;
+            transform: scale(1.05);
+        }
+
+        .delete {
+            background-color: #e74c3c;
+            color: white;
+            height: 30px;
+            width: 65px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .delete:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .side_bar_main {
+            display: flex;
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="../src/images/logo.png" alt="logo" class="logo-icon">
+            <p class="notification-header">Notifications</p>
+        </div>
+        <div class="side_bar_main">
+            <div class="menu">
+                <a href="home.html">
+                    <div class="home-menu menu-items">
+                        <img src="../src/icons/home.png" alt="Home" id="home" class="icon-menu">
+                        <a href="#" class="menu-item"> Home</a>
+                    </div>
+                </a>
+
+                <a href="search.html">
+                    <div class="serach-menu menu-items">
+                        <img src="../src/icons/scerch.png" alt="Search" id="search" class="icon-menu">
+                        <a href="search.html" class="menu-item"> Search</a>
+                    </div>
+                </a>
+
+                <div class="message-menu menu-items">
+                    <img src="../src/icons/message.png" alt="Messages" id="message" class="icon-menu">
+                    <a href="#" class="menu-item"> Messages</a>
+                </div>
+
+                <a href="notification.html">
+                    <div class="notification-menu menu-items selected-icon">
+                        <img src="../src/icons/notification_on_select.png" alt="Notification" id="notification"
+                            class="icon-menu">
+                        <a href="notification.html" class="menu-item"> Notifications</a>
+                    </div>
+                </a>
+
+                <a href="create.html">
+                    <div class="create-menu menu-items">
+                        <img src="../src/icons/create.png" alt="Create" id="create" class="icon-menu">
+                        <a href="create.html" class="menu-item"> Create</a>
+                    </div>
+                </a>
+
+                <div class="profile-menu menu-items">
+                    <img src="../src/icons/profile.png" alt="Profile" id="profile" class="icon-menu">
+                    <a href="#" class="menu-item"> Profile</a>
+
+                </div>
+
+                <div class="more-menu menu-items">
+                    <img src="../src/icons/more.png" alt="More" id="more" class="icon-menu">
+                    <a href="#" class="menu-item"> More</a>
+
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="notifications" id="notifications-container"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="post">
+            <div class="post-header">
+                <img src="user-avatar.jpg" alt="User Avatar" class="avatar">
+                <span class="username">rajazialuhaq</span>
+                <span class="time">10h</span>
+            </div>
+            <div class="post-content">
+                <img src="post-image.jpg" alt="Post Image">
+                <p class="caption">to Nabi e Kareem (PBUH).</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // Sample notification data
+    const notifications = [
+        {
+            avatar: "https://picsum.photos/seed/user1/40/40",
+            text: "john requested to follow you",
+            buttons: ["Confirm", "Delete"]
+        },
+        {
+            avatar: "https://picsum.photos/seed/user2/40/40",
+            text: "alex and 4 others liked your post"
+        },
+        {
+            avatar: "https://picsum.photos/seed/user3/40/40",
+            text: "jane smith just following you"
+        },
+        {
+            avatar: "https://picsum.photos/seed/user4/40/40",
+            text: "jhon doe is on Instagram. Follow them?",
+            buttons: ["Follow"]
+        }
+    ];
+
+
+    // Function to render notifications
+    function loadNotifications() {
+        const container = document.getElementById("notifications-container");
+        container.innerHTML = ""; // Clear existing notifications
+
+        notifications.forEach(notification => {
+            const div = document.createElement("div");
+            div.classList.add("notification");
+
+            // Generate buttons with different classes
+            let buttonsHTML = "";
+            if (notification.buttons) {
+                notification.buttons.forEach(btn => {
+                    let className = btn === "Confirm" ? "confirm" : btn === "Delete" ? "delete" : "confirm";
+                    buttonsHTML += `<button class="${className}">${btn}</button>`;
+                });
+            }
+
+            div.innerHTML = `
+            <img src="${notification.avatar}" alt="User">
+            <div class="text">${notification.text}</div>
+            <div class="buttons">
+                ${buttonsHTML}
+            </div>
+        `;
+
+            container.appendChild(div);
+        });
+    }
+
+    // Load notifications when the page loads
+    window.onload = loadNotifications;
+
+</script>
+
+</html>

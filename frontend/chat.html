@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigram Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <script defer src="main.js"></script> -->
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> FontAwesome Icons -->
+
+    <style>
+        body {
+            display: flex;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 500px;
+            background: #111;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-name {
+            width: 180px;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        /* Sidebar Menu */
+        .menu {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .menu-item {
+            display: none;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+
+
+        }
+
+        /* Hover Effect */
+        .menu-items:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+        /* transition fixed on sleected option*/
+        .selected-icon {
+            background: #333;
+
+        }
+
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 600px;
+            /* Adjusted to fit sidebar width */
+            margin-right: 200px;
+            /* Adjusted to fit sidebar width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 90vh;
+        }
+
+        /* Post Styling */
+        .post {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+
+        .time {
+            margin-left: auto;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .post-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .caption {
+            margin-top: 10px;
+        }
+
+        .icon-menu {
+            width: 40px;
+            height: 40px;
+
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            padding: 5px;
+            margin: 4px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            width: 40px;
+        }
+
+
+        .message-header {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-top: 0px;
+        }
+
+        .main_img {
+            height: 200px;
+            width: 250px;
+            margin-left: 100px;
+        }
+
+        .text {
+            margin-left: 100px;
+            margin-top: 0px;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-width: 400px;
+        }
+
+        .side_bar_main {
+            display: flex;
+
+        }
+
+        /* .side_bar_main {
+            display: flex;
+            width: 600px;
+        } */
+
+
+
+        /* Chat Message Styles */
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 3px;
+            height: 55px;
+        }
+
+        .chat-item:hover {
+            background: #222;
+        }
+
+        .chat-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .chat-item .username {
+            font-weight: bold;
+        }
+
+        .chat-item .last-message {
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="../src/images/logo.png" alt="logo" class="logo-icon">
+            <p class="message-header">Messages</p>
+        </div>
+        <div class="side_bar_main">
+            <div class="menu">
+                <a href="home.html">
+                    <div class="home-menu menu-items">
+                        <img src="../src/icons/home.png" alt="Home" id="home" class="icon-menu">
+                        <a href="home.html" class="menu-item"> Home</a>
+                    </div>
+                </a>
+
+                <a href="search.html">
+                    <div class="serach-menu menu-items">
+                        <img src="../src/icons/scerch.png" alt="Search" id="search" class="icon-menu">
+                        <a href="search.html" class="menu-item"> Search</a>
+                    </div>
+                </a>
+
+                <div class="message-menu menu-items selected-icon">
+                    <img src="../src/icons/message_on_select.png" alt="Messages" id="message" class="icon-menu">
+                    <a href="chat.html" class="menu-item"> Messages</a>
+                </div>
+
+                <a href="notification.html">
+                    <div class="notification-menu menu-items ">
+                        <img src="../src/icons/notification.png" alt="Notification" id="notification" class="icon-menu">
+                        <a href="notification.html" class="menu-item"> Notifications</a>
+                    </div>
+                </a>
+
+                <a href="create.html">
+                    <div class="create-menu menu-items">
+                        <img src="../src/icons/create.png" alt="Create" id="create" class="icon-menu">
+                        <a href="create.html" class="menu-item"> Create</a>
+                    </div>
+                </a>
+
+                <div class="profile-menu menu-items">
+                    <img src="../src/icons/profile.png" alt="Profile" id="profile" class="icon-menu">
+                    <a href="profile.html" class="menu-item"> Profile</a>
+
+                </div>
+
+                <div class="more-menu menu-items">
+                    <img src="../src/icons/more.png" alt="More" id="more" class="icon-menu">
+                    <a href="#" class="menu-item"> More</a>
+
+                </div>
+            </div>
+            <!-- Notifications Section -->
+            <div class="messages" id="messagess-container"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <img src="../src/icons/chat_page.png" alt="" class="main_img">
+        <h3 class="text">Your Messages</h3>
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const messagesContainer = document.getElementById("messagess-container");
+
+        const chats = [
+            {
+                username: "JohnDoe",
+                avatar: "../src/images/p1.jpg",
+                lastMessage: "Hey! How are you?"
+            },
+            {
+                username: "JaneSmith",
+                avatar: "../src/images/p2.jpg",
+                lastMessage: "Let’s catch up later."
+            },
+            {
+                username: "TechGuru",
+                avatar: "../src/images/p3.jpeg",
+                lastMessage: "Check out this cool update!"
+            },
+            {
+                username: "abc",
+                avatar: "../src/images/p4.jpg",
+                lastMessage: "Check out this "
+            }
+        ];
+
+        chats.forEach(chat => {
+            const chatItem = document.createElement("div");
+            chatItem.classList.add("chat-item");
+
+            chatItem.innerHTML = `
+            <img src="${chat.avatar}" alt="${chat.username}">
+            <div>
+                <div class="username">${chat.username}</div>
+                <div class="last-message">${chat.lastMessage}</div>
+            </div>
+        `;
+
+            messagesContainer.appendChild(chatItem);
+        });
+    });
+
+
+    window.onload = addEventListener;
+
+
+</script>
+
+
+</html>

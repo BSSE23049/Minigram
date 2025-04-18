@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+.sidebar-left {
+  padding-top: 45px;
+}
+
+/* logo style*/
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-name {
+  width: 150px;
+  height: 30px;
+}
+
+/* Scroll Section */
+.scroll-section {
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 760px;
+  /* 
+  overflow-y: auto; Enables vertical scrolling
+  */
+  height: 100vh;
+  /* Full height */
+}
+
+/* Profile logo container */
+.profile-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Profile Image */
+.profile-image {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* Main Post Container */
+.post-content {
+  border: 0.5px solid rgba(245, 245, 245, 0.534);
+  width: 400px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.image-content {
+  height: 500px;
+  width: 350px;
+}
+
+/* Like, share, and post */
+.interaction-container {
+  height: 50px;
+  display: flex;
+  gap: 10px;
+  padding: 5px;
+}
+
+.interaction-box {
+  width: 40px;
+  height: 100%;
+}
+
+.interaction-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.interaction-icon:hover {
+  cursor: pointer;
+}
+
+/* Sticky Suggestions */
+.suggestions {
+  position: sticky;
+  top: 20px;
+  right: 20px;
+  height: 100vh;
+  width: 80px;
+  padding: 20px;
+  background: black;
+  border-left: 1px solid gray;
+}
+
+/* Trending Topics */
+.topic-image {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.trending-topic {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
