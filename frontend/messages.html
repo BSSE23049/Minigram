@@ -12,7 +12,7 @@
     <style>
         body {
             display: flex;
-            background-color: #000;
+            background-color: #111;
             color: #fff;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -29,6 +29,7 @@
             top: 0;
             left: 0;
             overflow-y: auto;
+            border-right: 0.25px solid white;
 
         }
 
@@ -82,16 +83,18 @@
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 20px;
-            margin-left: 600px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+            margin-left: 450px;
             /* Adjusted to fit sidebar width */
-            margin-right: 200px;
+           
             /* Adjusted to fit sidebar width */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 90vh;
+            height: 99vh;
         }
 
         /* Post Styling */
@@ -160,12 +163,6 @@
             margin-top: 0px;
         }
 
-        .main_img {
-            height: 200px;
-            width: 250px;
-            margin-left: 100px;
-        }
-
         .text {
             margin-left: 100px;
             margin-top: 0px;
@@ -221,6 +218,86 @@
             font-size: 14px;
             color: #aaa;
         }
+
+
+        .chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+ background-color: #111;
+  padding: 10px;
+  width: 900px;
+  border-radius: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 100px;
+ 
+ 
+  
+}
+
+.chat-header {
+  padding: 20px;
+  background: #111;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.message {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 15px;
+  line-height: 1.4;
+}
+
+.received {
+  background: #484545;
+  align-self: flex-start;
+color:white;
+}
+
+.sent {
+  background: #0084ff;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-input {
+  display: flex;
+  padding: 15px;
+  background: #111;
+  border-top: 1px solid #ccc;
+  position: sticky;
+  bottom: 0px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background: #0095f6;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
     </style>
 </head>
 
@@ -277,16 +354,26 @@
 
                 </div>
             </div>
-            <!-- main Section -->
             <div class="messages" id="messagess-container"></div>
         </div>
     </div>
 
     <div class="main-content">
-        <img src="../src/icons/chat_page.png" alt="" class="main_img">
-        <h3 class="text">Your Messages</h3>
+    
+        <div class="chat-area">
+            <div class="chat-header">Chat with Alice</div>
+            <div class="chat-box">
+                <div class="message received"></div>
+                <div class="message sent"></div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type a message...">
+                <button>Send</button>
+            </div>
+        </div>
     </div>
 </body>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -332,8 +419,59 @@
     });
 
 
-    window.onload = addEventListener;
 
+  const messages = [
+    { type: "received", text: "Hi! How are you?" },
+    { type: "sent", text: "I'm good! How about you?" },
+    { type: "received", text: "Doing well, thanks!" },
+    { type: "sent", text: "Great to hear that!" }
+  ];
+
+  function loadMessages() {
+    const chatBox = document.querySelector(".chat-box");
+    chatBox.innerHTML = ""; // Clear existing messages
+
+    messages.forEach(msg => {
+      const div = document.createElement("div");
+      div.className = `message ${msg.type}`;
+      div.textContent = msg.text;
+      chatBox.appendChild(div);
+    });
+  }
+
+ 
+
+  // Add functionality to send a new message
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.querySelector(".chat-input input");
+    const button = document.querySelector(".chat-input button");
+
+    button.addEventListener("click", () => {
+      const newMessage = input.value.trim();
+      if (newMessage !== "") {
+        messages.push({ type: "sent", text: newMessage });
+        input.value = "";
+        loadMessages();
+        // Scroll to bottom
+        const chatBox = document.querySelector(".chat-box");
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    });
+  });
+
+
+  function loadUserName(userName) {
+  const header = document.querySelector(".chat-header");
+  header.textContent = `Chat with ${userName}`;
+}
+
+// Example: Load "Alice" when the page loads
+window.onload = function() {
+  loadUserName("Alice");
+  loadMessages(); // also call your existing message loader
+  
+  addEventListener();
+};
 
 </script>
 
