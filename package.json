@@ -1,0 +1,45 @@
+{
+  "name": "minigram",
+  "version": "1.0.0",
+  "description": "social media",
+  "homepage": "https://github.com/Shuja-ud-din/Minigram#readme",
+  "bugs": {
+    "url": "https://github.com/Shuja-ud-din/Minigram/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shuja-ud-din/Minigram.git"
+  },
+  "license": "ISC",
+  "author": "Shuja",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.1"
+  },
+  "lint-staged": {
+    "client/src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config client/eslint.config.js",
+      "prettier --write"
+    ],
+    "server/**/*.{js,ts}": [
+      "eslint --fix --config server/eslint.config.js",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "eslint": "^9.20.1",
+    "nodemon": "^3.1.9"
+  }
+}
