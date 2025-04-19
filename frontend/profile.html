@@ -12,6 +12,29 @@
     <script defer src="script.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
+         :root {
+            --primary-bg: #000;
+            --secondary-bg: #111;
+            --tertiary-bg: #222;
+            --hover-bg: #333;
+            --text-color: #fff;
+            --secondary-text: #aaa;
+            --accent-color: #1DA1F2;
+            --liked-color: #E0245E;
+            --border-radius: 8px;
+            --sidebar-width: 350px;
+            --right-sidebar-width: 300px;
+            --sidebar-collapsed-width: 80px;
+            --suggestion-height: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
         body {
             display: flex;
             background-color: #000;
@@ -62,8 +85,6 @@
             text-decoration: none;
             color: #fff;
             font-size: 18px;
-
-
         }
 
         .icon-menu {
@@ -88,13 +109,11 @@
             transform: scale(1.05);
         }
 
-
         /* transition fixed on sleected option*/
         .selected-icon {
             background: #333;
 
         }
-
         /* Main Content */
         .main-content {
             flex: 1;
@@ -205,10 +224,12 @@
                 </div>
             </a>
 
-            <div class="message-menu menu-items">
-                <img src="../src/icons/message.png" alt="Messages" id="message" class="icon-menu">
-                <a href="#" class="menu-item"> Messages</a>
-            </div>
+            <a href="chat.html">
+                <div class="message-menu menu-items">
+                    <img src="../src/icons/message.png" alt="Messages" id="message" class="icon-menu">
+                    <a href="chat.html" class="menu-item"> Messages</a>
+                </div>
+            </a>
 
             <a href="notification.html">
                 <div class="notification-menu menu-items">

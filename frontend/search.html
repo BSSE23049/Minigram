@@ -5,11 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minigram Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
     <script defer src="main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- FontAwesome Icons -->
 
     <style>
+        :root {
+            --primary-bg: #000;
+            --secondary-bg: #111;
+            --tertiary-bg: #222;
+            --hover-bg: #333;
+            --text-color: #fff;
+            --secondary-text: #aaa;
+            --accent-color: #1DA1F2;
+            --liked-color: #E0245E;
+            --border-radius: 8px;
+            --sidebar-width: 350px;
+            --right-sidebar-width: 300px;
+            --sidebar-collapsed-width: 80px;
+            --suggestion-height: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             display: flex;
             background-color: #000;
@@ -61,8 +83,6 @@
             text-decoration: none;
             color: #fff;
             font-size: 18px;
-
-
         }
 
         /* Hover Effect */
@@ -78,7 +98,6 @@
         }
 
 
-
         /* Main Content */
         .main-content {
             flex: 1;
@@ -91,17 +110,28 @@
             height: 100vh;
         }
 
+
         /* Post Styling */
         .post {
-            background: #222;
+            background: var(--tertiary-bg);
             padding: 15px;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .post:hover {
+            transform: translateY(-2px);
         }
 
         .post-header {
             display: flex;
             align-items: center;
+            margin-bottom: 10px;
         }
 
         .avatar {
@@ -109,6 +139,7 @@
             height: 40px;
             border-radius: 50%;
             margin-right: 10px;
+            object-fit: cover;
         }
 
         .username {
@@ -118,18 +149,167 @@
         .time {
             margin-left: auto;
             font-size: 14px;
-            color: #aaa;
+            color: var(--secondary-text);
         }
 
         .post-content img {
             width: 100%;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             margin-top: 10px;
+            object-fit: cover;
         }
 
         .caption {
             margin-top: 10px;
+            line-height: 1.4;
         }
+
+        .post-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--hover-bg);
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            margin-right: 15px;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .action-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .action-btn.liked {
+            color: var(--liked-color);
+        }
+
+        .like-count {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--hover-bg);
+            display: none;
+        }
+
+        .comments-section.active {
+            display: block;
+        }
+
+        .comment {
+            display: flex;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-username {
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .comment-time {
+            font-size: 12px;
+            color: var(--secondary-text);
+            margin-top: 4px;
+        }
+
+        .comment-form {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+        }
+
+        .comment-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .comment-input::placeholder {
+            color: var(--secondary-text);
+        }
+
+        .post-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: opacity 0.2s ease;
+        }
+
+        .post-btn:hover {
+            opacity: 0.8;
+        }
+
+        .post-btn:disabled {
+            background: var(--secondary-bg);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+
+        /* Toggle Button */
+        .toggle-sidebar {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
 
         .icon-menu {
             width: 40px;
@@ -145,11 +325,10 @@
             margin: 4px 0;
             border-radius: 8px;
             transition: all 0.3s ease-in-out;
-            width: 40px;
+            width: 50px;
         }
 
         /* Search Results */
-
         .Search-header {
             font-size: 30px;
             font-weight: bold;
@@ -231,11 +410,13 @@
                         <a href="#" class="menu-item"> Search</a>
                     </div>
                 </a>
-
-                <div class="message-menu menu-items">
-                    <img src="../src/icons/message.png" alt="Messages" id="message" class="icon-menu">
-                    <a href="#" class="menu-item"> Messages</a>
-                </div>
+                
+                <a href="chat.html">
+                    <div class="message-menu menu-items">
+                        <img src="../src/icons/message.png" alt="Messages" id="message" class="icon-menu">
+                        <a href="chat.html" class="menu-item"> Messages</a>
+                    </div>
+                </a>
 
                 <a href="notification.html">
                     <div class="notification-menu menu-items">
@@ -251,16 +432,16 @@
                     </div>
                 </a>
 
-                <div class="profile-menu menu-items">
-                    <img src="../src/icons/profile.png" alt="Profile" id="profile" class="icon-menu">
-                    <a href="#" class="menu-item"> Profile</a>
-
-                </div>
+                <a href="profile.html">
+                    <div class="profile-menu menu-items">
+                        <img src="../src/icons/profile.png" alt="Profile" id="profile" class="icon-menu">
+                        <a href="profile.html" class="menu-item"> Profile</a>
+                    </div>
+                </a>
 
                 <div class="more-menu menu-items">
                     <img src="../src/icons/more.png" alt="More" id="more" class="icon-menu">
                     <a href="#" class="menu-item"> More</a>
-
                 </div>
             </div>
 
