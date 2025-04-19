@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minigram Dashboard</title>
+    <script defer src="main.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,8 +18,8 @@
             --accent-color: #1DA1F2;
             --liked-color: #E0245E;
             --border-radius: 8px;
-            --sidebar-width: 280px;
-            --right-sidebar-width: 300px;
+            --sidebar-width: 500px;
+            --right-sidebar-width: 0px;
             --sidebar-collapsed-width: 80px;
             --suggestion-height: 300px;
         }
@@ -434,6 +435,68 @@
             text-transform: uppercase;
         }
 
+
+        /* Search Results */
+
+        .Search-header {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-top: 0px;
+        }
+
+        .search-container {
+            margin: 5px 15px;
+        }
+
+        .search-bar {
+            width: 180%;
+            padding: 10px;
+            margin-bottom: 12px;
+            background-color: #1f2937;
+            color: white;
+            border-radius: 6px;
+            border: 1px solid #374151;
+            outline: none;
+            font-size: 16px;
+            transition: border 0.3s, box-shadow 0.3s;
+
+        }
+
+        .search-bar:focus {
+            border-color: #7e22ce;
+            box-shadow: 0 0 5px rgba(126, 34, 206, 0.5);
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            width: 170%;
+            margin-left: 10px;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .result-item:hover {
+            background: #111;
+        }
+
+        .side_bar_main {
+            width: 550px;
+        }
+
+
+
         /* Toggle Button */
         .toggle-sidebar {
             display: none;
@@ -560,311 +623,104 @@
         <div class="logo-container">
             <img src="../src/images/logo.png" alt="logo" class="logo-icon">
             <img src="../src/images/logo-name.png" alt="minigram" class="logo-name">
+            <p class="Search-header">Search</p>
         </div>
-        <div class="menu">
-            <a href="home.html" class="menu-items selected-icon">
-                <img src="../src/icons/home_on_select.png" alt="Home" class="icon-menu">
-                <span class="menu-item">Home</span>
-            </a>
-            <a href="search.html" class="menu-items">
-                <img src="../src/icons/scerch.png" alt="Search" class="icon-menu">
-                <span class="menu-item">Search</span>
-            </a>
-            <a href="messages.html" class="menu-items">
-                <img src="../src/icons/message.png" alt="Messages" class="icon-menu">
-                <span class="menu-item">Messages</span>
-            </a>
-            <a href="notification.html" class="menu-items">
-                <img src="../src/icons/notification.png" alt="Notification" class="icon-menu">
-                <span class="menu-item">Notifications</span>
-            </a>
-            <a href="create.html" class="menu-items">
-                <img src="../src/icons/create.png" alt="Create" class="icon-menu">
-                <span class="menu-item">Create</span>
-            </a>
-            <a href="profile.html" class="menu-items">
-                <img src="../src/icons/profile.png" alt="Profile" class="icon-menu">
-                <span class="menu-item">Profile</span>
-            </a>
-            <a href="#" class="menu-items">
-                <img src="../src/icons/more.png" alt="More" class="icon-menu">
-                <span class="menu-item">More</span>
-            </a>
-        </div>
-    </div>
+        <div class="side_bar_main">
+            <div class="menu ">
+                <a href="home.html" class="menu-items selected-icon">
+                    <img src="../src/icons/home_on_select.png" alt="Home" class="icon-menu">
+                    <span class="menu-item">Home</span>
+                </a>
+                <a href="search.html" class="menu-items">
+                    <img src="../src/icons/scerch.png" alt="Search" class="icon-menu">
+                    <span class="menu-item">Search</span>
+                </a>
+                <a href="messages.html" class="menu-items">
+                    <img src="../src/icons/message.png" alt="Messages" class="icon-menu">
+                    <span class="menu-item">Messages</span>
+                </a>
+                <a href="notification.html" class="menu-items">
+                    <img src="../src/icons/notification.png" alt="Notification" class="icon-menu">
+                    <span class="menu-item">Notifications</span>
+                </a>
+                <a href="create.html" class="menu-items">
+                    <img src="../src/icons/create.png" alt="Create" class="icon-menu">
+                    <span class="menu-item">Create</span>
+                </a>
+                <a href="profile.html" class="menu-items">
+                    <img src="../src/icons/profile.png" alt="Profile" class="icon-menu">
+                    <span class="menu-item">Profile</span>
+                </a>
+                <a href="#" class="menu-items">
+                    <img src="../src/icons/more.png" alt="More" class="icon-menu">
+                    <span class="menu-item">More</span>
+                </a>
+            </div>
 
-    <div class="main-content">
-        <div class="post" id="post-1">
-            <div class="post-header">
-                <img src="https://picsum.photos/seed/post1/600/400" alt="User Avatar" class="avatar">
-                <span class="username">rajazialuhaq</span>
-                <span class="time">10h</span>
+            <!-- Search Bar and Results -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-bar" placeholder="Search..." autofocus>
+                <div class="search-results" id="results"></div>
             </div>
-            <div class="post-content">
-                <img src="https://picsum.photos/seed/post10/600/400" alt="Post Image">
-                <p class="caption">to Nabi e Kareem (PBUH).</p>
-            </div>
-            <div class="post-actions">
-                <button class="action-btn like-btn"><i class="far fa-heart"></i></button>
-                <button class="action-btn comment-btn"><i class="far fa-comment"></i></button>
-            </div>
-            <div class="like-count">147 likes</div>
-            <div class="comments-section">
-                <div class="comment">
-                    <img src="https://picsum.photos/seed/post3/600/400" alt="User Avatar" class="comment-avatar">
-                    <div class="comment-content">
-                        <span class="comment-username">ahmed_23</span>
-                        <span class="comment-text">MashaAllah, beautiful post!</span>
-                        <div class="comment-time">8h ago</div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="https://picsum.photos/seed/post4/600/400" alt="User Avatar" class="comment-avatar">
-                    <div class="comment-content">
-                        <span class="comment-username">sara_khan</span>
-                        <span class="comment-text">SubhanAllah ❤️</span>
-                        <div class="comment-time">5h ago</div>
-                    </div>
-                </div>
-                <div class="comment-form">
-                    <input type="text" class="comment-input" placeholder="Add a comment...">
-                    <button class="post-btn" disabled>Post</button>
-                </div>
-            </div>
-        </div>
 
-        <div class="post" id="post-2">
-            <div class="post-header">
-                <img src="https://picsum.photos/seed/post5/600/400" alt="User Avatar" class="avatar">
-                <span class="username">travel_photography</span>
-                <span class="time">23h</span>
-            </div>
-            <div class="post-content">
-                <img src="https://picsum.photos/seed/post2/600/400" alt="Post Image">
-                <p class="caption">Beautiful sunset at the beach. #travel #photography</p>
-            </div>
-            <div class="post-actions">
-                <button class="action-btn like-btn"><i class="far fa-heart"></i></button>
-                <button class="action-btn comment-btn"><i class="far fa-comment"></i></button>
-            </div>
-            <div class="like-count">243 likes</div>
-            <div class="comments-section">
-                <div class="comment">
-                    <img src="https://picsum.photos/seed/post6/600/400" alt="User Avatar" class="comment-avatar">
-                    <div class="comment-content">
-                        <span class="comment-username">nature_lover</span>
-                        <span class="comment-text">Wow! Where was this taken?</span>
-                        <div class="comment-time">20h ago</div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="https://picsum.photos/seed/post7/600/400" alt="User Avatar" class="comment-avatar">
-                    <div class="comment-content">
-                        <span class="comment-username">travel_photography</span>
-                        <span class="comment-text">@nature_lover This was in Bali, Indonesia!</span>
-                        <div class="comment-time">18h ago</div>
-                    </div>
-                </div>
-                <div class="comment-form">
-                    <input type="text" class="comment-input" placeholder="Add a comment...">
-                    <button class="post-btn" disabled>Post</button>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- Suggestions Container -->
-    <div class="suggestions-list right-sidebar" id="suggestions-list"></div>
-
+    <div class="main-content"></div>
 
     <script>
-        // Toggle sidebar on mobile
-        const toggleBtn = document.querySelector('.toggle-sidebar');
-        const sidebar = document.querySelector('.sidebar');
+        document.getElementById("searchInput").addEventListener("input", function () {
+            let query = this.value.toLowerCase();
+            let results = document.getElementById("results");
 
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('expanded');
-        });
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 576) {
-                if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
-                    sidebar.classList.remove('expanded');
+            let sampleUsers = [
+                {
+                    avatar: "https://picsum.photos/seed/user1/40/40",
+                    name: "rajab.ali94",
+                    followers: "1.7M"
+                },
+                {
+                    avatar: "https://picsum.photos/seed/user2/40/40",
+                    name: "rajaziaulhaq",
+                    followers: "815K"
+                },
+                {
+                    avatar: "https://picsum.photos/seed/user3/40/40",
+                    name: "rajat_9629",
+                    followers: "3.8M"
+                },
+                {
+                    avatar: "https://picsum.photos/seed/user4/40/40",
+                    name: "rajamobiles.pk",
+                    followers: "4.9K"
+                },
+                {
+                    avatar: "https://picsum.photos/seed/user5/40/40",
+                    name: "raja_hassnain_amir",
+                    followers: "1.0M"
                 }
+            ];
+
+            if (query === "") {
+                results.innerHTML = "";
+                return;
             }
-        });
 
-        // Like button functionality
-        const likeButtons = document.querySelectorAll('.like-btn');
-        likeButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const heartIcon = this.querySelector('i');
-                const likeCountElement = this.closest('.post-actions').nextElementSibling;
-                let likeCount = parseInt(likeCountElement.textContent);
+            let filteredUsers = sampleUsers.filter(user => user.name.includes(query));
 
-                this.classList.add('like-animation');
-
-                if (heartIcon.classList.contains('far')) {
-                    // Like the post
-                    heartIcon.classList.remove('far');
-                    heartIcon.classList.add('fas');
-                    this.classList.add('liked');
-                    likeCount++;
-                } else {
-                    // Unlike the post
-                    heartIcon.classList.remove('fas');
-                    heartIcon.classList.add('far');
-                    this.classList.remove('liked');
-                    likeCount--;
-                }
-
-                likeCountElement.textContent = `${likeCount} likes`;
-
-                // Remove animation class after animation completes
-                setTimeout(() => {
-                    this.classList.remove('like-animation');
-                }, 300);
-            });
-        });
-
-        // Comment button functionality
-        const commentButtons = document.querySelectorAll('.comment-btn');
-        commentButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const post = this.closest('.post');
-                const commentsSection = post.querySelector('.comments-section');
-                commentsSection.classList.toggle('active');
-
-                // Focus on comment input when opened
-                if (commentsSection.classList.contains('active')) {
-                    const commentInput = commentsSection.querySelector('.comment-input');
-                    commentInput.focus();
-                }
-            });
-        });
-
-        // Comment input and post button functionality
-        const commentInputs = document.querySelectorAll('.comment-input');
-        commentInputs.forEach(input => {
-            const postButton = input.nextElementSibling;
-
-            input.addEventListener('input', function () {
-                // Enable/disable post button based on input content
-                if (this.value.trim() !== '') {
-                    postButton.disabled = false;
-                } else {
-                    postButton.disabled = true;
-                }
-            });
-
-            input.addEventListener('keypress', function (e) {
-                // Post comment on Enter key
-                if (e.key === 'Enter' && this.value.trim() !== '') {
-                    addComment(this);
-                }
-            });
-
-            postButton.addEventListener('click', function () {
-                addComment(input);
-            });
-        });
-
-        // Right sidebar follow button functionality
-        const rightFollowButtons = document.querySelectorAll('.right-follow-btn');
-        rightFollowButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                if (this.textContent === 'Follow') {
-                    this.textContent = 'Following';
-                } else {
-                    this.textContent = 'Follow';
-                }
-            });
-        });
-
-        // Function to add a new comment
-        function addComment(inputElement) {
-            const commentsSection = inputElement.closest('.comments-section');
-            const commentForm = inputElement.closest('.comment-form');
-            const commentText = inputElement.value.trim();
-
-            if (commentText !== '') {
-                // Create new comment element
-                const newComment = document.createElement('div');
-                newComment.className = 'comment';
-
-                // Get current user avatar (using placeholder for demo)
-                const userAvatar = 'https://via.placeholder.com/32';
-
-                // Get current username (for demo purposes)
-                const currentUsername = 'your_username';
-
-                // Create comment HTML
-                newComment.innerHTML = `
-                    <img src="${userAvatar}" alt="User Avatar" class="comment-avatar">
-                    <div class="comment-content">
-                        <span class="comment-username">${currentUsername}</span>
-                        <span class="comment-text">${commentText}</span>
-                        <div class="comment-time">just now</div>
+            results.innerHTML = filteredUsers.map(user => `
+                <div class="result-item">
+                    <img src="${user.avatar}" alt="Profile">
+                    <div>
+                        <p>${user.name}</p>
+                        <small>${user.followers} followers</small>
                     </div>
-                `;
-
-                // Insert new comment before the comment form
-                commentsSection.insertBefore(newComment, commentForm);
-
-                // Clear input field
-                inputElement.value = '';
-                inputElement.nextElementSibling.disabled = true;
-            }
-        }
-
-        // sample data for right sidebar suggestions
-        const suggestions = [
-            {
-                username: "photography_expert",
-                follows: "Followed by sara_khan + 8 more",
-                avatar: "https://picsum.photos/seed/post11/600/400"
-            },
-            {
-                username: "tech_geek",
-                follows: "Followed by ahmad_23 + 3 more",
-                avatar: "https://picsum.photos/seed/post12/600/400"
-            },
-            {
-                username: "food_lovers",
-                follows: "Followed by chef_amina",
-                avatar: "https://picsum.photos/seed/post13/600/400"
-            },
-            {
-                username: "fitness_guru",
-                follows: "New to Minigram",
-                avatar: "https://picsum.photos/seed/post14/600/400"
-            },
-            {
-                username: "travel_addict",
-                follows: "Followed by 12 people you follow",
-                avatar: "https://picsum.photos/seed/post15/600/400"
-            }
-        ];
-
-        const suggestionsContainer = document.getElementById("suggestions-list");
-
-        suggestions.forEach(user => {
-            const userDiv = document.createElement("div");
-            userDiv.className = "right-suggested-user";
-            userDiv.innerHTML = `
-            <img src="${user.avatar}" alt="${user.username}" class="right-suggested-avatar">
-            <div class="right-suggested-info">
-                <div class="right-suggested-username">${user.username}</div>
-                <div class="right-suggested-follows">${user.follows}</div>
-            </div>
-            <button class="right-follow-btn">Follow</button>
-        `;
-            suggestionsContainer.appendChild(userDiv);
+                </div>
+            `).join("");
         });
-
-
     </script>
+
+
 </body>
 
 </html>
